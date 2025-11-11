@@ -7,21 +7,40 @@ class Calculator:
 
     def multiply(self, a, b):
         result = 0
-        for i in range(b+1):
+        bcount = b
+        if b < 0:
+            bcount = b*-1
+        for i in range(bcount):
             result = self.add(result, a)
+        if b < 0:
+            result = result*-1
         return result
 
     def divide(self, a, b):
         result = 0
-        while a > b:
-            a = self.subtract(a, b)
+        divisend = a
+        divisor = b
+        if divisend < 0 :
+            divisend = divisend - (divisend + divisend)
+        if divisor < 0 :
+            divisor = divisor - (divisor + divisor)
+        while divisend > divisor-1:
+            divisend = self.subtract(divisor, divisend)
             result += 1
+        if b < 0 and a < 0:
+            return result
+        elif b < 0 or a < 0:
+            result = result - (result+result)
         return result
     
     def modulo(self, a, b):
-        while a <= b:
-            a = a-b
-        return a
+        adivbyb = self.divide(a,b)
+        if b < 0 and a < 0:
+            adivbyb = adivbyb
+        elif b < 0 or a < 0:
+            adivbyb = adivbyb-1
+        bmuldivresultint = self.multiply(adivbyb,b)
+        return self.subtract(bmuldivresultint, a)
 
 # Example usage:
 if __name__ == "__main__":
